@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('backend/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+              <a class="navbar-brand" href="#">AppSymfony</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#"> <i class="fa fa-home"></i> Acceuil<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> <i class="fa fa-cog"></i> Connecté tant que : {{ app.user.username }}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ path("fos_user_security_logout") }}"> <i class="fa fa-sign-out"></i> {{ 'layout.logout' | trans({},'FOSUserBundle') }}</a>
+                  </li>
+                      {% else %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ path("fos_user_security_login") }}"> <i class="fa fa-sign-in"></i> {{ 'layout.login' | trans({},'FOSUserBundle') }}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ path("fos_user_registration_register") }}">  <i class="fa fa-user"></i> {{ "layout.register" | trans({},'FOSUserBundle') }}</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+  </div>
+</nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

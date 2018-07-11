@@ -1,0 +1,30 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+<div class="card mt-5">
+  <div class="card-header">
+    <h3>{{ category.libelle }}</h3>
+  </div>
+  <div class="card-body">
+    <h5>{{ category.slug }}</h5>
+    <p>{{ category.description }}</p>
+    <small>
+        Créer le : {{ category.createdAt | date('d/m/Y') }} <br>
+        Modifié le : {{ category.updatedAt | date('d/m/Y')  }}
+    </small>
+  </div>
+</div>
+<div class="btn-group mt-1">
+    <a href="{{ path('category_index') }}" class="btn btn-secondary">Retour</a>
+    <a href="{{ path('category_edit', { 'id': category.id }) }}" class="btn btn-warning">Edit</a>
+</div>
+            
+
+{% endblock %}
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Tableau de bord</a></li>
+      <li class="breadcrumb-item"> <a href="{{ path('category_index') }}">List des categories</a> </li>
+      <li class="breadcrumb-item active">{{ category.libelle }}</li>
+    </ol>
+{% endblock %}

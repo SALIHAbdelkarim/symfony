@@ -53,10 +53,10 @@
 </nav>
 <div class="container-fluid mt-5">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       {% block breadcrumb %}{% endblock %}
     </div>
-        <div class="col-md-9" align="right">
+        <div class="col-md-8" align="right">
           <select name="accesRapide" class="btn btn-primary">
             <option value="">Nouveau article</option>
             <option value="">Nouvelle categories</option>
@@ -71,10 +71,10 @@
         </li>
         <li class="list-group-item">Categorie</li>
         <li class="list-group-item">
-          <a href="">List des catégories</a>
+          <a href="{{ path('category_index') }}">List des catégories</a>
         </li>
         <li class="list-group-item">
-            <a href="">Nouvelle catégorie</a>
+            <a href="{{ path('category_new') }}">Nouvelle categorie</a>
         </li>
         <li class="list-group-item">Article</li>
         <li class="list-group-item">

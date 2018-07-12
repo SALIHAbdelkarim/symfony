@@ -1,0 +1,39 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+    <h3>Nouveau Post</h3>
+        {{ form_start(edit_form) }}
+<div class="row">
+    <div class="col-md-8">
+    <div class="form-group">
+        {{ form_row(edit_form.title,{'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(edit_form.description,{'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(edit_form.body,{'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(edit_form.slug,{'attr':{'class':'form-control'}}) }}
+    </div>
+     
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+        {{ form_row(edit_form.datepublication,{'attr':{'class':'form-control'}}) }}
+    </div>
+        <div class="form-group">
+        {{ form_row(edit_form.categories,{'attr':{'class':'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(edit_form.image,{'required':false,'attr':{'class':'form-control'}}) }}
+    </div>
+       <input class="btn btn-warning" type="submit" value="Editer" />
+        <a class="btn btn-secondary" href="{{ path('admin_post_index') }}">Retour</a>
+</div>
+</div>
+
+{{ form_end(edit_form) }}
+ 
+{% endblock %}

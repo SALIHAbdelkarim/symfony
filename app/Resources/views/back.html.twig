@@ -5,7 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link rel="stylesheet" type="text/css" href="{{ asset('backend/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
     </head>
     <body>
@@ -53,14 +53,18 @@
 </nav>
 <div class="container-fluid mt-5">
   <div class="row">
+ 
+  </div>
+  <div class="row">
     <div class="col-md-4">
       {% block breadcrumb %}{% endblock %}
     </div>
-        <div class="col-md-8" align="right">
-          <select name="accesRapide" class="btn btn-primary">
-            <option value="">Nouveau article</option>
-            <option value="">Nouvelle categories</option>
-          </select>
+        <div  class="col-md-8" align="right" id="app">
+          {% verbatim %}
+          <select v-on:change='getAccesRapide()' name="accesRapide" class="btn btn-primary" v-model="accesRapide">
+            <option :value="acces.lien" v-for="acces in listAccesRapide">{{ acces.libelle }}</option>
+          {% endverbatim %}
+*          </select>
         </div>
   </div>
   <div class="row">
@@ -78,10 +82,10 @@
         </li>
         <li class="list-group-item">Article</li>
         <li class="list-group-item">
-          <a href="">List des articles</a>
+          <a href="{{ path('admin_post_index') }}">List des articles</a>
         </li>
         <li class="list-group-item">
-          <a href="">Nouveau article</a>
+          <a href="{{ path('admin_post_new') }}">Nouveau article</a>
         </li>
         <li class="list-group-item">Administration</li>
         <li class="list-group-item">
@@ -92,12 +96,35 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 bg-light">
+         <div class="col-md-6 m-auto text-center">
+            {{ include('default/alert.html.twig') }}
+        </div>
         {% block body %}{% endblock %}
     </div>
   </div>
 </div>
-
+    <script type="text/javascript" src="{{ asset('js/vue.js') }}"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+          el:'#app',
+          data:{
+            accesRapide : '',
+            listAccesRapide:[
+                          { libelle:'Accés Rapide',lien:"" },
+                          { libelle:'Nouveau Article', lien:"/admin/post/new" },
+                          { libelle:'Nouvelle Catégorie', lien:"/admin/category/new" }
+            ]
+          },
+          methods:{
+            getAccesRapide()
+            {
+              window.location = this.accesRapide;
+            }
+          }
+        })
+    </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
+

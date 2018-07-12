@@ -1,6 +1,7 @@
 {% extends 'back.html.twig' %}
 
 {% block body %}
+
     <h3>Liste des Catégories</h3>
     <div class="pull-right">
        <a href="{{ path('category_new') }}" class="btn btn-success"> <i class="fa fa-plus"></i> Nouvelle categorie</a>
@@ -21,7 +22,7 @@
                 <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
                 <td nowrap="nowrap">{{ category.libelle }}</td>
                 <td nowrap="nowrap">{{ category.slug }}</td>
-                <td>{{ category.description }}</td>
+                <td>{{ category.description| slice(0,80) }}...</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-primary" href="{{ path('category_show', { 'id': category.id }) }}"><i class="fa fa-search"></i></a>
@@ -34,6 +35,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(categories) }}
+    </div>
 
 {% endblock %}
 {% block breadcrumb %}

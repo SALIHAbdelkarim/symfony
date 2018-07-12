@@ -20,14 +20,15 @@ class CategoryController extends Controller
      * @Route("/", name="category_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $req)
     {
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('AdminBundle:Category')->findAll();
-
+        $paginate= $this->get('knp_paginator');
+        $paginatorCategories = $paginate->paginate($categories,$req->query->getInt('page',1),3);
         return $this->render('category/index.html.twig', array(
-            'categories' => $categories,
+            'categories' => $paginatorCategories,
         ));
     }
 
@@ -47,7 +48,7 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
-
+            $this->addFlash('success','La nouvelle categorie '. $category->getLibelle().' est ajouté avec succé');
             return $this->redirectToRoute('category_index');
         }
 
@@ -86,6 +87,7 @@ class CategoryController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success','Le categorie '. $category->getLibelle().' a été bien modifié');
 
             return $this->redirectToRoute('category_index');
         }

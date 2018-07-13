@@ -1,23 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<section class="hero is-medium is-primary is-bold">
+
+<section class="hero is-primary is-bold">
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-        Mini Projet en Symfony
+        Nos meilleurs Article
       </h1>
       <h2 class="subtitle">
-        By SALIH Abdelkarim
+        Lorem ipsum dolor sit amet
       </h2>
     </div>
   </div>
 </section>
 <br>
 <div class="container">
-  <div class="columns">
-  {% for post in posts %}
-        <div class="column">
+
+
+	<div class="columns is-multiline">
+		{% for index,post in posts %}
+		 <div class="column is-4">
           <div class="card">
             <div class="card-image">
               <figure class="image is-4by3">
@@ -25,28 +28,25 @@
               </figure>
             </div>
             <div class="card-content">
-             
-              <h5 class="title">{{ post.title }}</h5>
+             <a href="{{ path('blog_show',{'id':post.id}) }}">
+              <h5 class="title">{{ post.title }}</h5></a>
               <div class="content">
                 categorie:
                 {% for cat in post.categories %}
                      {{ cat.libelle }},
                 {% endfor %}
                 <br>
-               <p>{{ post.description | slice(0,120)}}...</p>
+               <p>{{ post.description | slice(0,80)}}...</p>
                 <br>
                 <time>{{ post.datepublication |date('Y-m-d') }}</time>
               </div>
             </div>
           </div>
         </div>
-  {% endfor %}
+        	{% endfor %}
+	</div>
 
+	
 </div>
-</div>
-
-{% endblock %}
-
-{% block stylesheets %}
-
+    
 {% endblock %}

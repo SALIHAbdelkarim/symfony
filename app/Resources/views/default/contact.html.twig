@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Contactez Nous
+      </h1>
+    </div>
+  </div>
+</section>
+<br>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-one-third">
+        <h1 class="title" align="center">Contactez Nous</h1>
+        {{ form_start(form) }}
+          <div class="field">
+            {{ form_label(form.from,null,{'label_attr':{'class':'label'}}) }}
+            <div class="control">
+              {{ form_widget(form.from,{'attr':{ 'class':'input' }}) }}
+            </div>
+          </div>
+          <div class="field">
+            {{ form_label(form.subject,null,{'label_attr':{'class':'label'}}) }}
+            <div class="control">
+              {{ form_widget(form.subject,{'attr':{ 'class':'input' }}) }}
+            </div>
+          </div>
+          <div class="field">
+            {{ form_label(form.body,null,{'label_attr':{'class':'label'}}) }}
+            <div class="control">
+              {{ form_widget(form.body,{'attr':{ 'class':'textarea' }}) }}
+            </div>
+          </div>
+            <div class="control">
+              {{ form_widget(form.send,{'attr':{'class':'button is-link'}}) }}              
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+</div>
+    
+{% endblock %}

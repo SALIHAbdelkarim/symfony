@@ -22,8 +22,7 @@ class PostType extends AbstractType
                 ->add('slug')
                 ->add('datepublication',DateType::class,array(
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',
-                    'data'   => new \Datetime()
+                    'format' => 'yyyy-MM-dd'
                 ))
                 ->add('categories',EntityType::class, array(
                     'class'          => 'AdminBundle\Entity\Category',

@@ -23,44 +23,49 @@
 
   <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="https://bulma.io/">
+      <a class="navbar-item" href="{{ path('homepage') }}">
         Acceuil
       </a>
-      <a class="navbar-item" href="https://bulma.io/">
+      <a class="navbar-item" href="{{ path('blog_index') }}">
         Blog
       </a>
-      <a class="navbar-item" href="https://bulma.io/">
+      <a class="navbar-item" href="{{ path('contact_form') }}">
         Contactez Nous
       </a>
-*
     </div>
-
+  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <div class="navbar-end">
-      <a class="navbar-item" href="https://bulma.io/">
-        Acceuil
+      <a class="navbar-item" href="#">
+        <i class="fa fa-cog"></i> Connecté tant que : {{ app.user.username }}</a>
       </a>
-      <a class="navbar-item" href="https://bulma.io/">
-        Blog
+      <a class="navbar-item" href="{{ path("fos_user_security_logout") }}"> <i class="fa fa-sign-out"></i> {{ 'layout.logout' | trans({},'FOSUserBundle') }}</a>
+    </div>
+    {% else %}
+    <div class="navbar-end">
+      <a class="navbar-item" href="{{path('fos_user_security_login')}}">
+        login
+      </a>
+      <a class="navbar-item" href="{{path('fos_user_registration_register')}}">
+        register
       </a>
     </div>
+    {% endif %}
   </div>
 </nav>
 </nav>
-<section class="hero is-medium is-primary is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
-        Mini Projet en Symfony
-      </h1>
-      <h2 class="subtitle">
-        By SALIH Abdelkarim
-      </h2>
-    </div>
-  </div>
-</section>
+
         {% block body %}
-            
+
         {% endblock %}
+            <footer class="footer">
+              <div class="content has-text-centered">
+                <p>
+                  <strong>Bulma</strong> by <a href="https://jgthms.com">SALIH Abdelkarim</a>. Formation symfony
+                  <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+                  is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+                </p>
+              </div>
+            </footer>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
